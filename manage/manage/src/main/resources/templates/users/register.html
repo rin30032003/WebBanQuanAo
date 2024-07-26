@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #000000;
+            color: #ffffff;
+            font-family: Arial, sans-serif;
+        }
+        .register-form {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 30px;
+            background: #333333;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+        }
+        .register-form h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .register-form .form-control {
+            margin-bottom: 20px;
+            background-color: #555555;
+            border: none;
+            color: #ffffff;
+        }
+        .register-form .form-control:focus {
+            background-color: #666666;
+        }
+        .register-form .btn-primary {
+            background-color: #000000;
+            border: none;
+        }
+        .register-form .btn-primary:hover {
+            background-color: #333333;
+        }
+        .register-form p {
+            text-align: center;
+            margin-top: 15px;
+        }
+        .register-form a {
+            color: #007bff;
+        }
+        .register-form a:hover {
+            color: #0056b3;
+        }
+        .alert {
+            color: #ffffff;
+            background-color: #444444;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <form th:action="@{/register}" method="post" class="register-form">
+                <h1>Register</h1>
+                <!-- Error message display if registration fails -->
+                <div th:if="${errors}" class="alert alert-danger" role="alert">
+                    <ul>
+                        <li th:each="error : ${errors}" th:text="${error}" class="text-danger text-start"></li>
+                    </ul>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone</label>
+                    <input type="tel" id="phone" name="phone" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-block">Register</button>
+                </div>
+                <p>Already have an account? <a th:href="@{/login}">Login</a></p>
+            </form>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

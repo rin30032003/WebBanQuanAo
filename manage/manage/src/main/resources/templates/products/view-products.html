@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Products</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #000000; /* Dark background color */
+            color: #ffffff; /* White text color */
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin-top: 50px;
+            padding: 20px;
+        }
+        h1 {
+            margin-bottom: 30px;
+            color: #ffffff; /* White heading color */
+        }
+        .product-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        .product-list li {
+            background-color: #555;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .product-list li h3 {
+            margin: 0;
+        }
+        .product-list li p {
+            margin: 0;
+        }
+        .btn-primary {
+            background-color: #ff0000; /* Red button background */
+            color: #ffffff; /* White button text color */
+            border: none;
+        }
+        .btn-primary:hover {
+            background-color: #cc0000; /* Darker red button background on hover */
+        }
+        .btn-danger {
+            background-color: #dc3545; /* Red button background for delete */
+            color: #ffffff; /* White button text color */
+            border: none;
+        }
+        .btn-danger:hover {
+            background-color: #c82333; /* Darker red button background on hover */
+        }
+    </style>
+</head>
+<body>
+<div class="container mt-5">
+    <h1>Edit Products</h1>
+    <!-- List of existing products -->
+    <ul class="product-list">
+        <li th:each="existingProduct : ${products}">
+            <div>
+                <h3 th:text="${existingProduct.name}">Product Name</h3>
+                <p th:text="'Quantity: ' + ${existingProduct.quantity}">Quantity</p>
+                <img th:src="@{${existingProduct.imageUrl}}" alt="Product Image" class="img-fluid mb-3" style="max-width: 100px;">
+            </div>
+            <div>
+                <a th:href="@{/products/edit/{id}(id=${existingProduct.id})}" class="btn btn-primary">Edit</a>
+                <form th:action="@{/products/delete/{id}(id=${existingProduct.id})}" method="post" style="display:inline;">
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+            </div>
+        </li>
+    </ul>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
